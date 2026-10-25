@@ -8,7 +8,9 @@ import {
   t,
 } from "./i18n/index.js";
 
-const ASSET_RELEASE_URL = import.meta.env.VITE_ASSET_URL;
+const ASSET_RELEASE_URL =
+  import.meta.env.VITE_ASSET_URL ||
+  "https://github.com/AliBerenKoc/Vice-Nexora/releases/download/v1.0.0/game.tar.gz";
 
 const BASE = import.meta.env.BASE_URL;
 
