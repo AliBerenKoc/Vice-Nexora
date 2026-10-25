@@ -250,12 +250,12 @@ async function initSetupFlow() {
     return;
   }
 
-  if (ASSET_RELEASE_URL) {
-    downloadLink.href = ASSET_RELEASE_URL;
-  } else {
-    // No archive URL configured for this build (VITE_ASSET_URL unset).
-    downloadLink.style.display = "none";
-  }
+const ASSET_RELEASE_URL = "/game.tar.gz";
+
+downloadLink.href = ASSET_RELEASE_URL;
+downloadLink.download = "game.tar.gz";
+downloadLink.style.display = "inline-block";
+
 
   const showError = (key, options) => {
     errorBox.style.display = "block";
