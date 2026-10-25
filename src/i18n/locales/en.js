@@ -3,7 +3,7 @@
 // in all locales: the game data is English-only.
 export default {
   meta: {
-    title: "GTA: Vice City — WASM Port",
+    title: "Nexora",
   },
   language: {
     label: "Language",
@@ -138,7 +138,7 @@ export default {
     unlimited: "(0 = unlimited)",
   },
   cover: {
-    alt: "Grand Theft Auto Vice City cover",
+    alt: "Evening harbor illustration",
   },
   disclaimer: {
     label: "DISCLAIMER:",
@@ -152,7 +152,7 @@ export default {
   },
   howto: {
     title: "How to play",
-    step1: "Download the game: press “Download game.tar.gz” and save the file on your computer. The game can’t run without it.",
+    step1: "Prepare your game archive: you need a game.tar.gz made from your own legitimate copy of the game. The game can’t run without it.",
     step2: "Mount it: press “Select game.tar.gz” and choose the file you just downloaded.",
     step3: "Wait for the import to finish until the status above says “Ready to play”.",
     step4: "Press “Start to play” and wait for the game to load.",

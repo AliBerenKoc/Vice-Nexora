@@ -15,7 +15,7 @@ const replaceBR = "/vcbr/"
 const configurableMode = params.get('configurable') === "1";
 
 // Settings that can be configured via URL or UI
-let autoFullScreen = params.get('fullscreen') !== "0";
+let autoFullScreen = params.get('fullscreen') === "1";
 let cheatsEnabled = params.get('cheats') === "1" || configurableMode;
 let maxFPS = parseInt(params.get('max_fps')) || 0;
 
@@ -89,7 +89,7 @@ async function startGame(e) {
     await resumeAudioContexts();
 
     if (isTouch && document.documentElement.requestFullscreen) {
-        await document.documentElement.requestFullscreen().catch(() => {});
+        await document.getElementById('stage').requestFullscreen().catch(() => {});
     }
 
     document.querySelector('.start-container').style.display = 'none';
@@ -366,7 +366,7 @@ Width=800
 Height=600
 Depth=32
 Subsystem=0
-Windowed=0
+Windowed=1
 [Controller]
 HeadBob1stPerson=0
 HorizantalMouseSens=0.002500

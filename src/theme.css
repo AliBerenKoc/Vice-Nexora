@@ -1,0 +1,166 @@
+/* theme.css: navbar + ortada oyun çerçevesi + footer. style.css'in ÜSTÜNE biner.
+   Seçiciler "html body" ile başlıyor ki yükleme sırası ne olursa olsun kazansın. */
+
+html:root {
+  --bg: #090d14; --surface: #0f1522; --surface-2: #141c2e; --surface-3: #1b2740;
+  --border: #25314a; --border-bright: #34456a; --border-cyan: #25314a;
+  --accent: #f43f5e; --accent-2: #fb7185;
+  --text-1: #f3f4f8; --text-2: #a4afc4; --text-3: #6b7894;
+  --success: #34d399; --warning: #fbbf24; --danger: #fb7185;
+  --radius-card: 14px; --radius-inner: 10px; --radius-btn: 10px;
+  --shadow-card: none; --glow-accent: none; --glow-cyan: none;
+}
+
+/* ─── Sayfa: arka plan görseli + sütun düzeni ─── */
+html body,
+html body.gameIsStarted {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  font-family: "Segoe UI Variable Text", "Segoe UI", system-ui, sans-serif;
+  background:
+    linear-gradient(rgba(9, 13, 20, 0.35), rgba(9, 13, 20, 0.35)),
+    url("/cover.svg") center 60% / cover no-repeat,
+    var(--bg) !important;
+}
+html body::before, html body::after { display: none; }
+html body ::selection { background: rgba(244, 63, 94, 0.4); }
+html ::-webkit-scrollbar-thumb { background: var(--border-bright); }
+html body a { color: var(--accent-2); }
+html body a:hover { color: var(--text-1); }
+
+/* ─── Navbar ─── */
+html body .navbar {
+  position: sticky; top: 0; z-index: 30;
+  display: flex; justify-content: space-between; align-items: center;
+  height: 64px; padding: 0 20px; box-sizing: border-box;
+  background: rgba(9, 13, 20, 0.94);
+  border-bottom: 1px solid var(--border);
+}
+html body .brand { display: flex; align-items: center; justify-self: start; }
+html body .brand-logo { display: block; width: 44px; height: 44px; }
+html body .navbar .lang-switcher { padding: 0; justify-self: end; display: flex; }
+
+/* ─── Oyun çerçevesi ─── */
+html body .page { flex: 1; display: grid; place-items: center; padding: 32px 16px; }
+html body .stage {
+  position: relative; width: min(1100px, 100%); aspect-ratio: 16 / 9;
+  background: #070b12; border: 1px solid var(--border); border-radius: 14px; overflow: hidden;
+}
+html body .stage:fullscreen { width: 100vw; height: 100vh; aspect-ratio: auto; border: 0; border-radius: 0; }
+html body .stage:-webkit-full-screen { width: 100vw; height: 100vh; aspect-ratio: auto; border: 0; border-radius: 0; }
+html body .stage .emscripten { z-index: 1; object-fit: contain; background: #000; }
+html body .stage .intro-container { z-index: 50; }
+html body .fs-btn {
+  position: absolute; right: 12px; bottom: 12px; z-index: 60;
+  display: grid; place-items: center; width: 40px; height: 40px; padding: 0;
+  border: 1px solid var(--border-bright); border-radius: 6px;
+  background: rgba(9, 13, 20, 0.85); color: var(--text-1); cursor: pointer;
+}
+html body .fs-btn:hover { border-color: var(--accent); }
+html body .fs-btn:focus-visible { outline: 2px solid var(--text-1); outline-offset: 2px; }
+
+/* Oyun başlamadan önceki kapak katmanı (Play + kurulum) */
+html body .stage .start-container {
+  position: absolute; inset: 0; z-index: 20; width: auto; margin: 0; padding: 24px;
+  display: flex; overflow: auto; box-sizing: border-box; background: #070b12;
+}
+html body.gameIsStarted .stage .start-container { display: none; }
+html body .idle { margin: auto; width: min(560px, 100%); text-align: center; }
+
+/* ─── Play ve durum ─── */
+html body .click-to-play { margin: 18px 0; }
+html body .click-to-play button {
+  max-width: 320px; margin: 0 auto; min-height: 58px;
+  background: var(--accent); color: #fff; font-size: 1.1rem; font-weight: 700;
+  letter-spacing: 0.02em; box-shadow: none;
+}
+html body .click-to-play button:not(:disabled):hover,
+html body .click-to-play button:not(:disabled):focus { transform: none; box-shadow: none; filter: brightness(1.12); outline: none; }
+html body .click-to-play button:not(:disabled):focus-visible { outline: 2px solid var(--text-1); outline-offset: 2px; }
+
+html body .storage-status {
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+  padding: 0; border: 0; background: none; box-shadow: none;
+  color: var(--text-2); font-weight: 500;
+}
+html body .storage-status::before { content: ""; flex: none; width: 8px; height: 8px; border-radius: 50%; background: var(--text-3); }
+html body .storage-status[data-state="ready"], html body .storage-status[data-state="missing"], html body .storage-status[data-state="error"] {
+  border: 0; background: none; box-shadow: none; color: var(--text-1);
+}
+html body .storage-status[data-state="ready"]::before { background: var(--success); }
+html body .storage-status[data-state="missing"]::before { background: var(--warning); }
+html body .storage-status[data-state="error"]::before { background: var(--danger); }
+
+/* ─── Açılır paneller (kurulum, kayıtlar, skin'ler, nasıl oynanır) ─── */
+html body .userdata-panel { margin-top: 10px; background: var(--surface-2); border-color: var(--border); }
+html body .userdata-panel > summary { padding: 14px 18px; }
+html body .userdata-panel > summary h2 { font-size: 1rem; font-weight: 600; }
+html body .userdata-panel > #setup-overlay { padding: 0 0 4px; border: 0; background: none; }
+html body #setup-overlay h2 { display: none; }
+html body .cheats-toggle { margin: 0; background: var(--surface-2); border-color: var(--border); }
+
+html body .file-picker { border: 1px solid var(--border-bright); background: var(--surface-3); }
+html body .file-picker:hover { transform: none; border-color: var(--accent); background: var(--surface-3); box-shadow: none; }
+html body .file-picker.disabled:hover { border-color: var(--border-bright); }
+html body .file-picker-label { text-transform: none; letter-spacing: 0; font-size: 0.82rem; font-weight: 600; color: var(--text-2); }
+html body .setup-actions-panel .dl-btn::before, html body .setup-actions-panel .file-picker::before { display: none; }
+html body .setup-actions-panel .file-picker { padding-left: 16px; }
+
+html body .reset-btn { color: var(--danger); border-color: rgba(251, 113, 133, 0.4); }
+html body .reset-btn:hover { background: rgba(251, 113, 133, 0.1); border-color: var(--danger); color: var(--danger); transform: none; }
+html body .prog-bar-fill, html body .progress-bar-fill { background: var(--accent); box-shadow: none; }
+html body .prog-bar-wrap { background: var(--surface-3); border-color: var(--border); }
+html body .progress-bar-container { border: 1px solid var(--border-bright); box-shadow: none; }
+html body #progress { accent-color: var(--accent); }
+html body #enable-cheats:checked + .switch-track { background: rgba(244, 63, 94, 0.25); border-color: var(--accent); }
+
+html body .userdata-btn { border-color: var(--border-bright); }
+html body .userdata-btn:hover:not(:disabled) { border-color: var(--accent); background: transparent; }
+html body .userdata-btn-danger { border-color: rgba(251, 113, 133, 0.4); color: var(--danger); }
+html body .userdata-status[data-state="ok"] { border-color: rgba(52, 211, 153, 0.35); background: rgba(52, 211, 153, 0.08); color: #86efac; }
+html body .userdata-status[data-state="error"] { border-color: rgba(251, 113, 133, 0.35); background: rgba(251, 113, 133, 0.08); color: #fecdd3; }
+html body .userdata-drop[data-dragging="1"] { border-color: var(--accent); background: var(--surface-3); }
+html body input:focus, html body select:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(244, 63, 94, 0.25); }
+
+/* ─── Dil seçici ─── */
+html body .lang-select { border-color: var(--border-bright); }
+html body .lang-select:hover { border-color: var(--accent); background: var(--surface-3); box-shadow: none; }
+html body .lang-select:focus-visible { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(244, 63, 94, 0.25); }
+
+/* ─── Footer: Nexora ─── */
+html body .site-footer {
+  display: flex; justify-content: center; padding: 22px 20px; box-sizing: border-box;
+  background: rgba(9, 13, 20, 0.94); border-top: 1px solid var(--border);
+}
+html body .site-footer .legacy { display: none; }
+html body .nexora {
+  display: inline-flex; align-items: center; gap: 12px; padding: 10px 24px;
+  border: 1px solid var(--border-bright); border-radius: 999px;
+  color: var(--text-1); text-decoration: none;
+  transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
+}
+html body .nexora-mark { width: 22px; height: 22px; flex: none; }
+html body .nexora-word {
+  font-family: Bahnschrift, "Segoe UI Semibold", system-ui, sans-serif;
+  font-weight: 700; font-size: 1.05rem; letter-spacing: 0.32em; margin-right: -0.32em;
+  background: linear-gradient(90deg, #fb7185, #fdba74);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+html body .nexora-arrow { color: var(--text-2); transition: transform 0.2s, color 0.2s; }
+html body .nexora:hover, html body .nexora:focus-visible {
+  border-color: var(--accent); background: rgba(244, 63, 94, 0.12); box-shadow: 0 0 24px rgba(244, 63, 94, 0.28); color: var(--text-1);
+}
+html body .nexora:hover .nexora-arrow, html body .nexora:focus-visible .nexora-arrow { transform: translate(3px, -3px); color: var(--text-1); }
+html body .nexora:focus-visible { outline: 2px solid var(--text-1); outline-offset: 3px; }
+@media (prefers-reduced-motion: reduce) { html body .nexora, html body .nexora-arrow { transition: none; } }
+
+/* ─── Küçük ekranlar ─── */
+@media (max-width: 700px) {
+  html body .page { padding: 16px 8px; }
+  html body .stage { aspect-ratio: auto; min-height: calc(100vh - 220px); }
+  html body .navbar { padding: 0 12px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html body .stage * { transition: none !important; }
+}
