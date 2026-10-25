@@ -256,6 +256,7 @@ async function initSetupFlow() {
 if (ASSET_RELEASE_URL) {
   downloadLink.href = ASSET_RELEASE_URL;
   downloadLink.download = "game.tar.gz";
+  downloadLink.target = "_self";
   downloadLink.style.display = "inline-block";
 } else {
   downloadLink.style.display = "none";
