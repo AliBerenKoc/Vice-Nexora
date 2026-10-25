@@ -250,11 +250,14 @@ async function initSetupFlow() {
     return;
   }
 
-const ASSET_RELEASE_URL = "/game.tar.gz";
 
-downloadLink.href = ASSET_RELEASE_URL;
-downloadLink.download = "game.tar.gz";
-downloadLink.style.display = "inline-block";
+if (ASSET_RELEASE_URL) {
+  downloadLink.href = ASSET_RELEASE_URL;
+  downloadLink.download = "game.tar.gz";
+  downloadLink.style.display = "inline-block";
+} else {
+  downloadLink.style.display = "none";
+}
 
 
   const showError = (key, options) => {
