@@ -182,3 +182,34 @@ html body .stage:-webkit-full-screen .fs-btn {
     width: 100%;
   }
 }
+/* ─── Navbar ve footer: renkli dokunuş ─── */
+html body .navbar {
+  background:
+    linear-gradient(90deg, rgba(244, 63, 94, 0.16), rgba(9, 13, 20, 0) 40%, rgba(9, 13, 20, 0) 60%, rgba(251, 191, 36, 0.10)),
+    rgba(9, 13, 20, 0.94);
+  border-bottom: 0;
+}
+html body .navbar::after,
+html body .site-footer::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #fb7185 30%, #fdba74 70%, transparent);
+  opacity: 0.85;
+}
+html body .navbar::after { bottom: 0; }
+html body .site-footer::before { top: 0; }
+
+html body .site-footer {
+  position: relative;
+  border-top: 0;
+  background:
+    linear-gradient(90deg, rgba(251, 191, 36, 0.08), rgba(9, 13, 20, 0) 40%, rgba(9, 13, 20, 0) 60%, rgba(244, 63, 94, 0.14)),
+    rgba(9, 13, 20, 0.94);
+}
+
+html body .brand-logo {
+  filter: drop-shadow(0 0 10px rgba(244, 63, 94, 0.5));
+}
