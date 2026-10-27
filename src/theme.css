@@ -213,3 +213,25 @@ html body .site-footer {
 html body .brand-logo {
   filter: drop-shadow(0 0 10px rgba(244, 63, 94, 0.5));
 }
+/* Telefonda oyun başlayınca çerçeve tüm ekranı kaplar (dikey ve yatay) */
+html body.gameIsStarted[data-is-touch="1"] {
+  overflow: hidden;
+}
+html body.gameIsStarted[data-is-touch="1"] .stage {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+  max-width: none;
+  aspect-ratio: auto;
+  min-height: 0;
+  border: 0;
+  border-radius: 0;
+  z-index: 40;
+}
+html body.gameIsStarted[data-is-touch="1"] .navbar,
+html body.gameIsStarted[data-is-touch="1"] .site-footer,
+html body.gameIsStarted[data-is-touch="1"] .fs-btn {
+  display: none;
+}
